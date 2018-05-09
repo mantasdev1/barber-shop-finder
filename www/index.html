@@ -19,30 +19,28 @@
 
 
 <div data-role="page" id="toDoPage">
+	<div data-role="header">
+		<div data-role="navbar" data-iconpos="right">
+			<ul>
+				<li><a href="#" data-icon="home" class="ui-btn-active">Homepage</a></li>
+				<li><a href="#" data-icon="star">Favourites</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
 
-<div data-role="header">
-    <div data-role="navbar" data-iconpos="right">
-        <ul>
-            <li><a href="#" data-icon="grid">Summary</a></li>
-            <li><a href="#" data-icon="star" class="ui-btn-active">Favs</a></li>
-            <li><a href="#" data-icon="gear">Setup</a></li>
-        </ul>
-    </div><!-- /navbar -->
-</div><!-- /footer -->
+	<div data-role="content">
+	<input type="text" name="textinput" id="addTaskText" value="" placeholder="New task"  />
+	<input type="button" id="addTaskButton" value="Add task"  />
 
-  <div data-role="content">
-    <input type="text" name="textinput" id="addTaskText" value="" placeholder="New task"  />
-    <input type="button" id="addTaskButton" value="Add task"  />
+	<ul data-role="listview" id="taskList">
+	<li>First task</li>
+	<li>Another task</li> 
+	</ul>
+	</div>
 
-    <ul data-role="listview" id="taskList">
-      <li>First task</li>
-      <li>Another task</li> 
-    </ul>
-  </div>
-
-  <div data-role="footer">
-    <h4>Footer</h4>
-  </div>
+	<div data-role="footer">
+	<h4>Footer</h4>
+	</div>
 
 </div>
 
