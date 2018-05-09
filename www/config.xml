@@ -19,8 +19,4 @@
 	
 	<plugin name="cordova-plugin-device-motion" />
 	
-	<platform name="android">
-		<splash src="www/splash.jpg" />
-	</platform>
-
 </widget>
