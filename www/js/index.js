@@ -44,10 +44,6 @@ var app = {
     },
 };
 
-$(document).on("pageshow","#toDoPage", onPageShow);
-
-function onPageShow() {
-	app.initialize();
-}
+app.initialize();
 
 
