@@ -6,6 +6,7 @@ var start = {lat: 52.1936, lng: -2.223981};
 var options = {
   enableHighAccuracy: true,
   timeout: 5000,
+  frequency: 1000,
   maximumAge: 5000
 };
 
