@@ -1,4 +1,5 @@
-var map;
+document.addEventListener("deviceready", function() {
+    var map;
 var places;
 var infowindow;
 var start = {lat: 52.1936, lng: -2.223981};
@@ -11,7 +12,7 @@ var options = {
 };
 
 function getLocation() {
-  navigator.geolocation.watchPosition(onSuccess, onError);
+  navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 }
 
 function onSuccess(position) {
@@ -77,3 +78,4 @@ function createMarker(place) {
       });
     });
 }
+});
