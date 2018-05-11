@@ -5,7 +5,7 @@
 var Infowindow;
 var Latitude = undefined;
 var Longitude = undefined;
-	$("#map").css("height", $(window).innerHeight());
+	$("#places").css("height", $(window).innerHeight());
 // Get geo coordinates
 
 function getPlacesLocation() {
