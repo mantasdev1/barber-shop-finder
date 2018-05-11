@@ -1,17 +1,18 @@
 var map;
-var start;
+var start = {lat: 0, lng: 0};
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+function onSuccess(position) {
+	start = {lat: position.coords.latitude, lng: position.coords.longitude};
+	alert(start);
+}
+
+function onError(error) {
+alert('code: ' + error.code + 'n' +
+'message: ' + error.message + 'n');
+}
 
 function loadMap() {
-	
-	 navigator.geolocation.getCurrentPosition(onSuccess, onError);
-		var onSuccess = function(position) {
-		start = {lat: position.coords.latitude, lng: position.coords.longitude};
-		};
-		
-		function onError(error) {
-			alert('code: '    + error.code    + 'n' +
-				  'message: ' + error.message + 'n');
-		}
 	
 	var mapOptions = {
 		zoom: 16,
@@ -27,7 +28,7 @@ function loadMap() {
 	$("#map").css("height", $(window).innerHeight());
 	
 	var marker = new google.maps.Marker({
-          position: start,
+          center: start,
           map: map,
           title: 'Hello World!'
      });
