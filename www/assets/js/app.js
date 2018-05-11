@@ -6,12 +6,12 @@ var start = {lat: 52.1936, lng: -2.223981};
 var options = {
   enableHighAccuracy: true,
   timeout: 5000,
-  frequency: 3000
+  frequency: 1000,
   maximumAge: 5000
 };
 
 function getLocation() {
-  navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  navigator.geolocation.watchPosition(onSuccess, onError);
 }
 
 function onSuccess(position) {
