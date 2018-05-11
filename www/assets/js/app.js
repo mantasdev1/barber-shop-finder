@@ -11,7 +11,7 @@ var options = {
 };
 
 function getLocation() {
-  navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  navigator.geolocation.watchPosition(onSuccess, onError, options);
 }
 
 function onSuccess(position) {
