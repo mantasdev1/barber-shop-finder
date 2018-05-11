@@ -6,7 +6,7 @@ var start = {lat: 52.1936, lng: -2.223981};
 var options = {
   enableHighAccuracy: true,
   timeout: 5000,
-  maximumAge: 0
+  maximumAge: 5000
 };
 
 function getLocation() {
