@@ -8,7 +8,7 @@ var infowindow;
 var start = {lat: 52.1936, lng: -2.223981};
 
 function getLocation() {
-  navigator.geolocation.watchPosition(onSuccess, onError);
+  navigator.geolocation.watchPosition(onSuccess, onError, {enableHighAccuracy: true, timeout: 10000, maximumAge: 20000 });
 }
 
 function onSuccess(position) {
