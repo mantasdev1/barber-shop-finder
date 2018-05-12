@@ -21,17 +21,18 @@ function getLocation() {
 function onSuccess(position) {
   start = {lat: position.coords.latitude, lng: position.coords.longitude};
 
+  if (!mapLoaded) {
+    loadMap();
+  }
+
   if (locationChecker) {
     clearInterval(locationChecker);
   }
 
-  if (!mapLoaded) {
-    loadMap();
+  watch = navigator.geolocation.watchPosition(function(location) {
+    userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
+  });
 
-    watch = navigator.geolocation.watchPosition(function(location) {
-      userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
-    });
-  }
 	console.log("Your GEO location is: " + position.coords.latitude + "," + position.coords.longitude);
 }
 
@@ -43,7 +44,6 @@ function onError(error) {
   if (!locationChecker) {
     locationChecker = setInterval(function() {
       getLocation();
-	  userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
     }, 1000);
   }
 
