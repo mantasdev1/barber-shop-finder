@@ -1,34 +1,40 @@
-document.addEventListener("deviceready", function() {
-    // Your code here...
-});
-
 var map;
 var places;
 var infowindow;
 var start = {lat: 52.1936, lng: -2.223981};
+var mapLoaded = false;
 
 var options = {
-  enableHighAccuracy: false,
+  enableHighAccuracy: true,
   timeout: 5000,
+  frequency: 1000,
   maximumAge: 5000
 };
 
 function getLocation() {
-  navigator.geolocation.watchPosition(onSuccess, onError, options);
+  navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 }
 
 function onSuccess(position) {
   start = {lat: position.coords.latitude, lng: position.coords.longitude};
-	loadMap();
+
+  if (!mapLoaded) {
+    loadMap();
+  }
 	console.log("Your GEO location is: " + position.coords.latitude + "," + position.coords.longitude);
 }
 
 function onError(error) {
-  loadMap();
+  if (!mapLoaded) {
+    loadMap();
+  }
+
   console.log('code: ' + error.code + 'n' + 'message: ' + error.message + 'n');
 }
 
 function loadMap() {
+  mapLoaded = true;
+
 	var mapOptions = {
 		zoom: 16,
 		center: start,
@@ -38,8 +44,6 @@ function loadMap() {
 	}
 
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-	infowindow = new google.maps.InfoWindow();
 	places = new google.maps.places.PlacesService(map);
 
 	places.nearbySearch({
@@ -72,11 +76,25 @@ function createMarker(place) {
 	  position: place.geometry.location
 	});
 
-	var request = { reference: place.reference };
-    places.getDetails(request, function(details, status) {
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(details.name + "<br />" + details.formatted_address + "<br>" + details.formatted_phone_number);
-        infowindow.open(map, this);
-      });
-    });
+  var infowindow = new google.maps.InfoWindow({
+    content: place.name
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    updateInfo(infowindow, place);
+    infowindow.open(map, marker);
+  });
+}
+
+function updateInfo(infowindow, place) {
+  var options = {
+    key: "AIzaSyC3lbd9ZMPSA-BDnvRVNPpHkd93uVA9B_4",
+    placeId: place.place_id
+  }
+
+  places.getDetails(options, function(details, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      infowindow.setContent(details.name + "<br />" + details.formatted_address + "<br>" + details.formatted_phone_number);
+    }
+  });
 }
