@@ -3,6 +3,8 @@ var places;
 var infowindow;
 var start = {lat: 52.1936, lng: -2.223981};
 var mapLoaded = false;
+var watch;
+var userMarker;
 
 var options = {
   enableHighAccuracy: true,
@@ -20,6 +22,10 @@ function onSuccess(position) {
 
   if (!mapLoaded) {
     loadMap();
+
+    watch = navigate.geolocation.watchPosition(function(location) {
+      userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
+    });
   }
 	console.log("Your GEO location is: " + position.coords.latitude + "," + position.coords.longitude);
 }
@@ -57,6 +63,8 @@ function loadMap() {
 		animation: google.maps.Animation.BOUNCE
 	});
 	marker.setMap(map);
+
+  userMarker = marker;
 
 	$("#map").css("height", $(window).innerHeight());
 }
