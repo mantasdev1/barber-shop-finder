@@ -32,6 +32,10 @@ function onSuccess(position) {
   watch = navigator.geolocation.watchPosition(function(location) {
     userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
   });
+  
+    if (userMarker) {
+		userMarker.setPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+	  }
 
 	console.log("Your GEO location is: " + position.coords.latitude + "," + position.coords.longitude);
 }
