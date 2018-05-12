@@ -34,6 +34,7 @@ function onSuccess(position) {
   });
   
     if (userMarker) {
+		loadMap();
 		userMarker.setPosition({lat: position.coords.latitude, lng: position.coords.longitude});
 	  }
 
