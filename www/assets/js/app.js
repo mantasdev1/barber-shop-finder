@@ -21,6 +21,10 @@ function getLocation() {
 function onSuccess(position) {
   start = {lat: position.coords.latitude, lng: position.coords.longitude};
 
+  if (locationChecker) {
+    clearInterval(locationChecker);
+  }
+
   if (!mapLoaded) {
     loadMap();
 
@@ -34,11 +38,11 @@ function onSuccess(position) {
 function onError(error) {
   if (!mapLoaded) {
     loadMap();
+  }
+
+  if (!locationChecker) {
     locationChecker = setInterval(function() {
-      if (navigator.geolocation) {
-        getLocation();
-        clearInterval(locationChecker);
-      }
+      getLocation();
     }, 1000);
   }
 
