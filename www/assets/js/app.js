@@ -43,6 +43,7 @@ function onError(error) {
   if (!locationChecker) {
     locationChecker = setInterval(function() {
       getLocation();
+	  userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
     }, 1000);
   }
 
