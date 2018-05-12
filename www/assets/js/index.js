@@ -74,7 +74,12 @@ function loadMap() {
 		center: start,
 		mapTypeControl: false,
 		navigationalControl: false,
-		disableDefaultUI: true
+		disableDefaultUI: true,
+		styles: [{
+			stylers: [{
+			  saturation: -100
+			}]
+		}]
 	}
 
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -88,7 +93,11 @@ function loadMap() {
 
 	var marker = new google.maps.Marker({
 		position: start,
-		animation: google.maps.Animation.BOUNCE
+		animation: google.maps.Animation.BOUNCE,
+		icon: {
+			url: "assets/images/home-icon.svg",
+			scaledSize: new google.maps.Size(44, 44)
+		}
 	});
 	marker.setMap(map);
 
@@ -109,7 +118,11 @@ function createMarker(place) {
 	var placeLoc = place.geometry.location;
 	var marker = new google.maps.Marker({
 	  map: map,
-	  position: place.geometry.location
+	  position: place.geometry.location,
+	  icon: {
+			url: "assets/images/barbers-icon.svg",
+			scaledSize: new google.maps.Size(44, 44)
+		}
 	});
 
   var infowindow = new google.maps.InfoWindow({
