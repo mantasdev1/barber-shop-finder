@@ -6,6 +6,7 @@ var mapLoaded = false;
 var watch;
 var userMarker;
 var locationChecker;
+var markers = [];
 
 var options = {
   enableHighAccuracy: true,
@@ -29,14 +30,23 @@ function onSuccess(position) {
     clearInterval(locationChecker);
   }
 
-  watch = navigator.geolocation.watchPosition(function(location) {
+  watch = navigate.geolocation.watchPosition(function(location) {
     userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
   });
-  
-    if (userMarker) {
-		loadMap();
-		userMarker.setPosition({lat: position.coords.latitude, lng: position.coords.longitude});
-	  }
+
+  if (userMarker) {
+    userMarker.setPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+
+    for (var i = 0; i < markers.length; i ++) {
+      markers[i].setMap(null);
+    }
+
+    places.nearbySearch({
+      location: start,
+      radius: 1000,
+      type: ['hair_care']
+    }, callback);
+  }
 
 	console.log("Your GEO location is: " + position.coords.latitude + "," + position.coords.longitude);
 }
@@ -109,6 +119,8 @@ function createMarker(place) {
     updateInfo(infowindow, place);
     infowindow.open(map, marker);
   });
+
+  markers.push(marker);
 }
 
 function updateInfo(infowindow, place) {
