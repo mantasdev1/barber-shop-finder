@@ -23,7 +23,7 @@ function onSuccess(position) {
   if (!mapLoaded) {
     loadMap();
 
-    watch = navigate.geolocation.watchPosition(function(location) {
+    watch = navigator.geolocation.watchPosition(function(location) {
       userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
     });
   }
