@@ -30,7 +30,7 @@ function onSuccess(position) {
     clearInterval(locationChecker);
   }
 
-  watch = navigate.geolocation.watchPosition(function(location) {
+  watch = navigator.geolocation.watchPosition(function(location) {
     userMarker.setPosition({lat: location.coords.latitude, lng: location.coords.longitude});
   });
 
