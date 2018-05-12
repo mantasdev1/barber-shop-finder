@@ -36,6 +36,7 @@ function onSuccess(position) {
 
   if (userMarker) {
     userMarker.setPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+	map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
 
     for (var i = 0; i < markers.length; i ++) {
       markers[i].setMap(null);
