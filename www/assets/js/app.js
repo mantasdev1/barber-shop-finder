@@ -5,6 +5,7 @@ var start = {lat: 52.1936, lng: -2.223981};
 var mapLoaded = false;
 var watch;
 var userMarker;
+var locationChecker;
 
 var options = {
   enableHighAccuracy: true,
@@ -33,6 +34,12 @@ function onSuccess(position) {
 function onError(error) {
   if (!mapLoaded) {
     loadMap();
+    locationChecker = setInterval(function() {
+      if (navigator.geolocation) {
+        getLocation();
+        clearInterval(locationChecker);
+      }
+    }, 1000);
   }
 
   console.log('code: ' + error.code + 'n' + 'message: ' + error.message + 'n');
